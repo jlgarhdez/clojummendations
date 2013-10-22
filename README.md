@@ -5,9 +5,10 @@ names.
 
 ## Prerequisites
 
-You will need [Leiningen][1] 1.7.0 or above installed.
+You will need [Leiningen][1] 1.7.0 or above and a [Lastfm][2] API key.
 
 [1]: https://github.com/technomancy/leiningen
+[2]: http://last.fm
 
 ## Running
 
