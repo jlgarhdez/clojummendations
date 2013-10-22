@@ -4,8 +4,9 @@
         clojummendations.models))
 
 ;FIXME: Should this go into templates.clj or something like that?
-(defn layout [content]
+(defn layout
   "Base layout for Clojummendations"
+  [content]
   (html5
     [:head
       [:title "Clojummendations, the best way to get recommendations for the music you listen"]
@@ -15,19 +16,25 @@
       [:div {:class "navbar navbar-inverse navbar-fixed-top"}
         [:div {:class "container"}
           [:div {:class "navbar-header"}
-            [:a {:class "navbar-brand" :href "/"} "Clojummendations"]]]]
+            [:a {:class "navbar-brand" :href "/"} "Clojummendations"]]
+          [:div {:class "navbar-collapse collapse"}
+            [:form {:action "/artist" :class "navbar-form navbar-right"}
+              [:div {:class "form-group"}
+                [:input {:name "artist" :type "text" :class "form-control" :placeholder "Artist name"}]]
+              [:input {:type "submit" :class "btn btn-primary"}]]]]]
       [:div {:class "container content"}
         content
         [:div {:class "clear"}]]]))
 
-(defn index-page []
+(defn index-page
   "View for the index page"
+  []
   (layout
     [:div {:class "starter-template"}
       [:h1 "Welcome to the Jungle!"]
       [:p {:class "lead"} "Clojummendations tries to recommend you the best music, try it out!"]
-      [:form
-        [:input {:type "text" :placeholder "Enter the name of an artist"}]
+      [:form {:action "/artist"}
+        [:input {:name "artist" :class "form-control" :type "text" :placeholder "Enter the name of an artist"}]
         [:input {:type "submit" :value "search clojummendations" :class "btn btn-primary"}]]]))
 
 (defn artists-page []
@@ -45,4 +52,4 @@
 
 (defn single-artist-page [artist]
   "View for the single artist page"
-  (layout [:span (display-related-artists artist artist-template)]))
+  (layout [:div {:class "columns"} (display-related-artists artist artist-template)]))
