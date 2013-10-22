@@ -12,14 +12,13 @@
       (include-css "//netdna.bootstrapcdn.com/twitter-bootstrap/3.0.0/css/bootstrap.min.css")
       (include-css "/css/style.css")]
     [:body
-      [:div {:class "navbar"}
-        [:div {:class "navbar-inner"}
+      [:div {:class "navbar navbar-inverse navbar-fixed-top"}
         [:div {:class "container"}
-          [:a {:class "brand" :href "/"} "Clojummendations"]]]]
+          [:div {:class "navbar-header"}
+            [:a {:class "navbar-brand" :href "/"} "Clojummendations"]]]]
       [:div {:class "container content"}
         content
-        [:footer
-          [:span "Proudly powered by Clojure :) | Built with love by jl@garhdez.com"]]]]))
+        [:div {:class "clear"}]]]))
 
 (defn index-page []
   "View for the index page"
@@ -40,10 +39,9 @@
   [artist-name artist-image artist-url]
   (html5
     [:div {:class "artist"}
+      [:img {:src artist-image}]
       [:a {:href artist-url}
-        [:div {:class "artist-name"} artist-name]]
-      [:div {:class "artist-image"}
-        [:img {:src artist-image}]]]))
+        [:div {:class "artist-name"} artist-name]]]))
 
 (defn single-artist-page [artist]
   "View for the single artist page"
