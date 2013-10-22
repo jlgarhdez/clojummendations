@@ -22,12 +22,14 @@
   "Calls the API and retrieves a JSON of artists related to the given artist"
   [artist-name]
   (let [json (get-json (construct-url artist-name))]
-    (map
-      (fn [artist] ; This function returns the image, url and name of each artist
-        {:name (get artist "name")
-         :url (str "http://" (get artist "url"))
-         :image (((get artist "image") 2) "#text")})
-      (get (get json "similarartists") "artist")))) ; Gets the array of similar artists
+    ((try 
+      (map
+        (fn [artist] ; This function returns the image, url and name of each artist
+          {:name (get artist "name")
+           :url (str "http://" (get artist "url"))
+           :image (((get artist "image") 3) "#text")})
+        (get (get json "similarartists") "artist"))
+       (catch Exception e ("An error occurred"))))) ; Gets the array of similar artists
 
 (defn display-related-artists
   "returns the HTML for the related artists of a given artist"
