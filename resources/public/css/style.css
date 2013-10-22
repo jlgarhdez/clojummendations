@@ -4,11 +4,14 @@
 }
 
 .container.content {
-  margin-top: 100px;
+  margin-top: 120px;
   width: 90%;
   max-width: 1100px;
   min-width: 800px;
   margin: 50px auto;
+}
+
+.container.content .columns {
   -webkit-column-count: 3;
   -webkit-column-gap: 10px;
   -webkit-column-fill: auto;
@@ -26,6 +29,7 @@ footer {
 }
 
 .artist {
+  width: 100%;
   display: inline-block;
   background: #FEFEFE;
   border: 2px solid #FAFAFA;
@@ -49,13 +53,12 @@ footer {
 }
 
 .pin .artist-name {
-  font: 12px/18px Arial, sans-serif;
   color: #333;
   margin: 0;
 }
 
 @media (min-width: 960px) {
-  .container.content{
+  .columns {
   -webkit-column-count: 4;
   -moz-column-count: 4;
   column-count: 4;
@@ -63,7 +66,7 @@ footer {
 }
 
 @media (min-width: 1100px) {
-  .container.content{
+  .columns {
   -webkit-column-count: 5;
   -moz-column-count: 5;
   column-count: 5;
@@ -88,4 +91,12 @@ footer {
 }
 * html .clear {
   height: 1%;
+}
+
+.starter-template form {
+  width: 300px;
+}
+
+.starter-template form .btn-primary {
+  margin-top: 10px;
 }
