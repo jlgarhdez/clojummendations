@@ -6,8 +6,8 @@
 
 (defroutes app-routes
   (GET "/" [] (index-page))
-  (GET "/artists" [] (artists-page))
-  (GET "/artist/:artist" [artist] (single-artist-page artist))
+  (GET "/artist" {params :params}
+    (single-artist-page (params :artist)))
   (route/resources "/")
   (route/not-found "Not Found"))
 
