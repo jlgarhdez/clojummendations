@@ -34,6 +34,7 @@
 (defn display-related-artists
   "returns the HTML for the related artists of a given artist"
   [artist artist-template]
-  (if (false? (get-related-artists artist))
-    (str "Sorry, no related artist found for " artist)
-    (map (fn [a] (artist-template (get a :name) (get a :image) (get a :url))) (vec (get-related-artists artist)))))
+  (let [artists (get-related-artists artist)]
+    (if (false? artists)
+      (str "Sorry, no related artist found for " artist)
+      (map (fn [a] (artist-template (get a :name) (get a :image) (get a :url))) (vec artists)))))
