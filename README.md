@@ -5,10 +5,12 @@ names.
 
 ## Prerequisites
 
-You will need [Leiningen][1] 1.7.0 or above and a [Lastfm][2] API key.
+You will need [Leiningen][1] 1.7.0 or above and a [Lastfm][2] API key. You'll have to
+write your API key in [models.clj][3]
 
 [1]: https://github.com/technomancy/leiningen
 [2]: http://last.fm
+[3]: https://github.com/jlgarhdez/clojummendations/blob/master/src/clojummendations/models.clj#L6
 
 ## Running
 
