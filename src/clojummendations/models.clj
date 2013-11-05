@@ -20,21 +20,13 @@
 
 (defn get-related-artists
   "Calls the API and retrieves a JSON of artists related to the given artist"
-  [artist-name]
-  (let [json (get-json (construct-url artist-name))]
-    (if (not (string? (get (get json "similarartists") "artist"))) ; Check if the query returned something
-      (map
-        (fn [artist] ; This function returns the image, url and name of each artist
-          {:name (get artist "name")
-           :url (str "http://" (get artist "url"))
-           :image (((get artist "image") 3) "#text")})
-        (get (get json "similarartists") "artist"))
-      false))) ; Gets the array of similar artists
+  [json]
+  (if (not (string? (get (get json "similarartists") "artist"))) ; Checks if the query returned something
+    (map
+      (fn [artist] ; This function returns the image, url and name of each artist
+        {:name (get artist "name")
+         :url (str "http://" (get artist "url"))
+         :image (((get artist "image") 3) "#text")})
+      (get (get json "similarartists") "artist"))
+    false))
 
-(defn display-related-artists
-  "returns the HTML for the related artists of a given artist"
-  [artist artist-template]
-  (let [artists (get-related-artists artist)]
-    (if (false? artists)
-      (str "Sorry, no related artist found for " artist)
-      (map (fn [a] (artist-template (get a :name) (get a :image) (get a :url))) (vec artists)))))

@@ -37,19 +37,31 @@
         [:input {:name "artist" :class "form-control" :type "text" :placeholder "Enter the name of an artist"}]
         [:input {:type "submit" :value "search clojummendations" :class "btn btn-primary"}]]]))
 
-(defn artists-page []
+(defn artists-page
+  []
   "View For the artists page"
   (layout [:span "This is a placeholder for a page that will contain a set of last searched artists... or something like that"]))
 
-(defn artist-template
-  "template for displaying each single result of an artist"
-  [artist-name artist-image artist-url]
-  (html5
-    [:div {:class "artist"}
-      [:img {:src artist-image}]
-      [:a {:href artist-url}
-        [:div {:class "artist-name"} artist-name]]]))
-
 (defn single-artist-page [artist]
   "View for the single artist page"
-  (layout [:div {:class "columns"} (display-related-artists artist artist-template)]))
+  (layout
+    [:div
+      {:class "columns"}
+      (->> artist
+           ; Creates url
+           construct-url
+           ; Retrieves the JSON
+           get-json
+           ; Gets the related artists from the JSON
+           get-related-artists
+           vec
+           ; Creates the html for each related artist
+           (map
+             (fn [artist]
+               (html
+                 [:div {:class "artist"}
+                   [:img {:src (get artist :image)}]
+                   [:a {:href (get artist :url)}
+                     [:div {:class "artist-name"} (get artist :name)]]])))
+           ; Converts the vector to string
+           (reduce str))]))
